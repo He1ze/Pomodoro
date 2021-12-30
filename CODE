@@ -1,0 +1,53 @@
+
+
+import sys
+import pyinputplus
+import time
+
+import logging
+logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - %(levelname)s -  %(message)s')
+logging.disable(logging.CRITICAL)
+
+
+def twentyFive():
+    time.sleep(25*60)
+    print('Break!')
+    time.sleep(5*60)
+
+def fifty():
+    time.sleep(50*60)
+    print('Break!')
+    time.sleep(10*60)
+
+
+totalTime = []
+
+while True:
+    question = pyinputplus.inputYesNo(prompt='Would you like to start your tasks? ')
+    if question == 'yes'.lower():
+        logging.debug('Timer Started')
+        break
+    else:
+        sys.exit()
+
+
+
+while True:
+    pomoTime = pyinputplus.inputMenu(['25/5', '50/10', 'quit'], lettered=True, numbered=False)
+    logging.debug('User chose %s' % pomoTime)
+
+    if pomoTime == '25/5':
+        print('Timer started')
+        twentyFive()
+        timeSession = 25
+        totalTime.append(timeSession)
+    elif pomoTime == '50/10':
+        print('Timer Started')
+        fifty()
+        timeSession = 50
+        totalTime.append(timeSession)
+    elif pomoTime == 'quit':
+        print('You studied for %s minutes!' % sum(totalTime))
+        break
+
+print('Thanks for studying with me')
